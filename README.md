@@ -1,128 +1,122 @@
-India Finance Pulse
+# 🌐📈 India Finance Pulse
 
 A lightweight Flask application that aggregates India-focused finance and market news from multiple RSS feeds. It fetches headlines from major business sources, normalizes timestamps to IST, filters recent stories, and displays everything in a clean, dark, responsive dashboard.
 
-🚀 Introduction
+# 🚀 Introduction
 
-India Finance Pulse provides a unified view of market-related updates—Nifty, Sensex, Indian business, and finance stories—pulled from various reliable RSS feeds.
-The interface presents cards grouped by source, each containing headlines, timestamps, and story links, offering a fast snapshot of financial updates across India.
+India Finance Pulse provides a unified view of market-related updates—Nifty, Sensex, business, and finance headlines—from trusted RSS sources.
+The dashboard presents cards grouped by source, each showing headlines, timestamps, and external links, giving you a fast digest of real-time market sentiment.
 
-🛠️ Getting Started
-1. Clone the repository
+# 🛠️ Getting Started
+🧭 1. Clone the repository
 git clone https://github.com/<your-username>/india-finance-pulse.git
 cd india-finance-pulse
 
-2. Create a virtual environment (recommended)
+🔒 2. Create a virtual environment
 python -m venv .venv
 source .venv/bin/activate      # macOS/Linux
 # OR
 .venv\Scripts\activate         # Windows
 
-3. Install dependencies
+📦 3. Install dependencies
 pip install -r requirements.txt
 
-4. Run the application
+▶️ 4. Run the app
 python app.py
 
 
-Visit the dashboard:
-http://localhost:5000/
+Visit: http://localhost:5000/
 
-⚙️ How It Works
+# ⚙️ How It Works
 
-A dictionary maps news sources to their RSS feed URLs.
+📡 RSS feeds are defined in a dictionary.
 
-Each feed is fetched with requests and parsed using feedparser.
+📰 Feeds are fetched using requests and parsed via feedparser.
 
-All timestamps are normalized to Indian Standard Time (Asia/Kolkata).
+🕒 Timestamps convert to IST for consistency.
 
-A filtering mechanism highlights stories from the past 24 hours while ensuring at least one article per feed always appears.
+🔍 Filtering logic highlights last-24-hour articles while ensuring each source shows at least one item.
 
-All items are merged, sorted by most recent, and passed into the Flask template.
+📊 Items merge & sort (most recent first).
 
-The UI renders a responsive, dark-themed grid showing:
+🎨 UI renders a grid of source cards with:
 
-Source name
+🔖 Headline
 
-Published time
+🕑 Published time
 
-Headline
+🔗 Article link
 
-External link to the story
+🏷️ Source name
 
-This creates a clear, real-time snapshot of finance and market movement across India.
+🧩 Configuration
 
-🔧 Configuration
+Everything is inside app.py:
 
-Inside app.py, you can configure:
-
-➤ RSS Feed Sources
-
-The FEEDS dictionary controls which sources are included:
-
+📡 RSS Sources
 FEEDS = {
-    "Moneycontrol": "https://...",
-    "Business Standard": "https://...",
+    "Moneycontrol": "...",
+    "Business Standard": "...",
 }
 
-➤ Time Window for Recent News
+⏱️ Time Window
 HOURS_WINDOW = 24
 
-➤ Filtering Logic
+# 🧠 Filtering Function
 
-The function filter_last_window() ensures:
+filter_last_window() ensures:
 
-Only recent items (last X hours) are prioritized.
+Recent items are prioritized
 
-A fallback story exists for every feed even if nothing new is available.
+A fallback article exists for each feed
 
-➤ HTML / UI
+# 🎨 Template & UI
 
-The TEMPLATE variable contains all HTML and CSS.
+The TEMPLATE variable contains the HTML + CSS used for rendering.
 
-🎨 Customisation
+# 🎛️ Customisation
 
-You can easily customize the application:
+Make the dashboard your own:
 
-✔ Add or remove news sources
+# ➕ Add or Remove Sources
 
-Edit entries in the FEEDS dict.
+Modify the FEEDS dict.
 
-✔ Change the UI theme
+# 🎨 Change Theme / Colors
 
-Modify CSS inside the template block.
+Edit CSS inside the template section.
 
-✔ Adjust data ordering
+# 🧹 Adjust Sorting
 
-Edit sorting logic inside the main request handler.
+Change sorting logic in the main route.
 
-✔ Expand metadata shown in cards
+# 📰 Show More Metadata
 
-Add fields like author, category, or summary.
+Add author, summary, category, etc.
 
-✔ Add pagination or infinite scrolling
+# 🔄 Add Pagination or Infinite Scroll
 
-Extend the Flask route and template.
+Extend the UI inside the template.
 
-🏭 Production Notes
+# 🏭 Production Notes
 
-For production deployment, it is recommended to use a WSGI server such as Gunicorn or uWSGI:
+Deploy using a WSGI server like Gunicorn:
 
 gunicorn -w 4 -b 0.0.0.0:8000 app:app
 
 
-Enhance reliability by placing Nginx in front for:
+For best performance, place Nginx in front for:
 
-SSL
+🔐 SSL
 
-Caching
+🚀 Caching
 
-Reverse proxy
+🔁 Reverse proxy
 
-Static file handling
+📂 Static handling
 
 🐳 Running with Docker (Optional)
-1. Dockerfile
+📄 Dockerfile
 FROM python:3.11-slim
 WORKDIR /app
 
@@ -134,30 +128,28 @@ COPY . .
 EXPOSE 5000
 CMD ["python", "app.py"]
 
-2. Build & Run
+# ▶️ Build & Run
 docker build -t india-finance-pulse .
 docker run -p 5000:5000 india-finance-pulse
 
 
-Access the dashboard at:
-http://localhost:5000/
+Visit: http://localhost:5000/
 
-🤝 Contributing
+# 🤝 Contributing
 
 Contributions are welcome!
+You can help by:
 
-You can contribute by:
+📰 Adding more RSS sources
 
-Adding more finance/business RSS feeds
+🎨 Improving UI/UX
 
-Improving UI/UX
+🧠 Enhancing filtering logic
 
-Enhancing filtering logic
+🧪 Adding tests
 
-Implementing tests
+⚙️ Building CI workflows
 
-Adding CI/CD pipelines
+📘 Improving docs
 
-Improving documentation
-
-Feel free to open issues or submit pull requests.
+Feel free to open issues or submit PRs.
